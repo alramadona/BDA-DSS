@@ -1,0 +1,21 @@
+# ANALISIS DATA BESAR DAN SISTEM PENDUKUNG KEPUTUSAN
+# 23 Desember 2021
+
+# Sesi perkuliahan akan cenderung dilaksanakan dengan 'hands on method' sehingga 
+# mahasiswa akan lebih banyak aktif; mencoba mengikuti instruksi dan mereproduksi studi kasus.
+# 
+# Harapannya, mahasiswa dapat mengembangkan  keahlian baru, serta mampu mengerjakan dan menyelesaikan 
+# suatu instruksi dengan baik dan mengaplikasikan studi kasus.
+# 
+# Mahasiswa akan menggunakan software analisis data dan pemrograman, yakni R.
+# Dengan demikian, diharapkan untuk menginstal software 
+# (1) R 
+# (2) R-studio 
+# secara berurutan, sebelum pelaksanaan sesi perkuliahan. 
+# 
+# File installer 'freely available' untuk sistem operasi utama seperti Windows, MacOS dan Linux; 
+# dapat diperoleh melalui tautan berikut.
+# (1) https://cran.r-project.org/
+# (2) https://www.rstudio.com/products/rstudio/download/#download
+#   
+# Terimakasih
