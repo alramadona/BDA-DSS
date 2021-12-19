@@ -4,28 +4,44 @@ library(rtweet)
 library(ggplot2)
 load("data/tweets.RData")
 
+names(tweets_streamID)
 ## use lat_lng to recover full information geolocation data
-ID_loc <- lat_lng(tweets_streamID)
-names(ID_loc)
+tweets_streamID <- lat_lng(tweets_streamID)
+names(tweets_streamID)
 
+# install.packages("sf")
 library(sf)
+
 ID_area <- st_read("map/IDN_adm1x.shp")
 
 ggplot(data = ID_area) +
   geom_sf(fill = NA) +
-  geom_point(data = ID_loc, 
+  geom_point(data = tweets_streamID, 
              aes(x = lng, y = lat, col = "red"), size = 1)
 
 
+# Mobility Analysis -------------------------------------------------------
+
 dat <- read.csv("data/tweetsLoc_0120.csv")
-dat$X <- NULL
+
+nrow(dat)
+names(dat)
+unique(dat$date)
+
 str(dat)
+dat$X <- NULL
+
+unique(dat$WoY)
+
+ggplot(data = ID_area) +
+  geom_sf(fill = NA) +
+  geom_point(data = dat, 
+             aes(x = lon, y = lat, col = WoY), size = 1)
 
 ggplot(data = ID_area) +
   geom_sf(fill = NA) +
   geom_point(data = dat, 
              aes(x = lon, y = lat, col = PROV), size = 1)
-
 
 library(dplyr)
 datLinks <- dat %>% 
@@ -60,32 +76,13 @@ datLinks <- merge(datLinks,datCentroids[,c(1,5,6)], by="ID_area", all.x=T)
 
 datLinks <- arrange(datLinks, r,c)
 
-# library(networkD3)
-# nodes <- dat %>%
-#   group_by(PROV, ID_area) %>%
-#   summarize(ID_mean = mean(ID_area)) %>%
-#   ungroup() %>%
-#   arrange(ID_mean)
-# 
-# nodes$ID_area <- nodes$ID_area-1
-# datLinks$origin <- datLinks$r-1
-# datLinks$destination <- datLinks$c-1
-# 
-# # forceNetwork(Links = datLinks, Nodes = nodes, Source = 'origin', Target = 'destination', 
-# #              Value = 'n', NodeID = 'PROV', Group = 'ID_area', zoom = TRUE)
-# 
-# datLinks = datLinks[datLinks['r'] != datLinks['c'],]
-# 
-# sankeyNetwork(Links = datLinks, Nodes = nodes, Source = 'origin', Target = 'destination', 
-#               Value = 'n', NodeID = 'PROV', fontSize = 8)
-
-datLinks <- datLinks[datLinks['r'] != datLinks['c'],]
+#datLinks <- datLinks[datLinks['r'] != datLinks['c'],]
 datLinks <- datLinks[datLinks['r'] == 8,]
 
 library(geosphere)
 
 names(datLinks)
-flows <- gcIntermediate(datLinks[,c(8,7)], datLinks[,c(10,9)], sp = TRUE, addStartEnd = TRUE)
+flows <- gcIntermediate(datLinks[,c(7,6)], datLinks[,c(9,8)], sp = TRUE, addStartEnd = TRUE)
 
 range(datLinks$n)
 
