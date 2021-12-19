@@ -22,7 +22,7 @@ save_as_csv(users_UGM, "data/users_UGM.csv")
 
 tweets_streamID <- stream_tweets(
   c(95,-11, 141,6),
-  timeout = 60*60 # 30 minutes
+  timeout = 60*60 # 60 minutes
 )
 save_as_csv(tweets_streamID, "data/tweets_streamID.csv")
 
