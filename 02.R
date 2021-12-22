@@ -107,3 +107,5 @@ leaflet() %>%
                group = ~origins, color = ~pal(origins)) %>%
   addLayersControl(overlayGroups = unique(flows$origins), 
                    options = layersControlOptions(collapsed = FALSE))
+
+# https://www.researchgate.net/profile/Aditya-Ramadona/publication/355484693_Population_mobility_patterns_and_early_phases_of_the_COVID-19_pandemic_in_Indonesia/links/61749ca20be8ec17a9207e7b/Population-mobility-patterns-and-early-phases-of-the-COVID-19-pandemic-in-Indonesia.pdf
